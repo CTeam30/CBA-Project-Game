@@ -13,12 +13,12 @@ function draw() {
 
 function keyPressed() {
 	if (keyCode === LEFT_ARROW) {
-		horizontal = horizontal - 10
+		horizontal -= 10
 		clear()
 		background(50);
 	}
 	if (keyCode === RIGHT_ARROW) {
-		horizontal = horizontal + 10
+		horizontal += 10
 		clear()
 		background(50);
 	}
