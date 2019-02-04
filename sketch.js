@@ -1,17 +1,26 @@
-let value = 0
+let horizontal = 400
+
 function setup() {
-  createCanvas(800, 450);
-	background(120);
+	createCanvas(800, 450);
+	background(50);
 }
 
 function draw() {
-	fill(value, value, value, 20, 70)
-	rect(mouseX, mouseY, 20, 20)
+	noStroke()
+	fill(255, 255, 255, 20, 70)
+	rect(horizontal, 200, 20, 20)
 }
 
 function keyPressed() {
-		if (keyCode === LEFT_ARROW) {
-			clear()
-		}
+	if (keyCode === LEFT_ARROW) {
+		horizontal = horizontal - 10
+		clear()
+		background(50);
+	}
+	if (keyCode === RIGHT_ARROW) {
+		horizontal = horizontal + 10
+		clear()
+		background(50);
+	}
 	return false
 }
