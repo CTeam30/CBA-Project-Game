@@ -7,10 +7,18 @@ function setup() {
 }
 
 function draw() {
+		if (vertical < 200) {
+		setInterval(10)
+		vertical +=3
+		clear()
+		background(50)
+	}
 	noStroke()
 	fill(255, 255, 255, 20, 70)
 	rect(horizontal, vertical, 20, 20)
+
 }
+
 
 function keyPressed() {
 	if (keyCode === LEFT_ARROW) {
@@ -26,7 +34,7 @@ function keyPressed() {
 	}
 	
 	if (keyCode === UP_ARROW) {
-		vertical -= 10
+		vertical -= 50
 		clear()
 		background(50);
 	}
