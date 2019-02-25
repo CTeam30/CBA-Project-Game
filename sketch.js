@@ -6,11 +6,15 @@ var game = {
 	wait : 0,
 	gravitypull : 1,
 	jump : 0,
+	onbarrier : 1,
 }
 
 var block = {
 	x : 0,
 	y : 200,
+	col1 : 255,
+	col2 : 255,
+	col3 : 255,
 }
 
 var barrier = {
@@ -45,7 +49,7 @@ function setup() {
 	barrier.y = random(platform.y +30, platform.y - 90)
 	
 	reward.x = random(platform.x +30, platform.x - 90)
-	reward.y = random(platform.y -30, platform.y - 90)
+	reward.y = random(platform.y -30, platform.y - 150)
 	
 	extraCanvas = createGraphics(600, 400);
 	extraCanvas.clear()
@@ -65,6 +69,9 @@ function draw() {
 	if (d < 20 && game.wait < 1) {
 		game.wait += 1000
 		game.life = game.life - 1
+		block.col1 = 255
+		block.col2 = 0 
+		block.col3 = 0
 	}
 	//barrier and block distance detection
 	
@@ -80,10 +87,18 @@ function draw() {
 	
 	let e = block.y - platform.y
 	let f = block.x - platform.x
-	if (e > -21 && e < -20 && f < 20 && f > -20) {
+	if (e > -22 && e <= -20 && f < 20 && f > -20) {
 		game.gravitypull = 0
 		game.jump = 1
-	} else {
+		game.onbarrier = 1
+		if (game.onbarrier = 0) {
+			block.y += 1
+		}
+		else{
+				game.onbarrier = 0
+		}
+	}
+	else {
 		game.gravitypull = 1
 	}
 	//platform and block distance detection
@@ -97,17 +112,17 @@ function draw() {
 	//barrier and platform distance detection
 	
 	let r = dist(reward.x, reward.y, platform.x, platform.y)
-	if (r > 100 || r < 30) {
+	if (r > 150 || r < 60) {
 		reward.x = random(platform.x +30, platform.x - 90)
-		reward.y = random(platform.y -30, platform.y - 90)
+		reward.y = random(platform.y -60, platform.y - 150)
 		clear()
 	}
 	//reward and platform distance detection
 	
 	let t = dist(barrier.x, barrier.y, reward.x, reward.y)
-	if (t > 100 || t < 30) {
+	if (t > 150 || t < 60) {
 		reward.x = random(platform.x +30, platform.x - 90)
-		reward.y = random(platform.y -30, platform.y - 90)
+		reward.y = random(platform.y -60, platform.y - 150)
 		clear()
 	}
 	//reward and barrier distance detection
@@ -125,25 +140,17 @@ function draw() {
 		clear();
 		//background(50);
 	}
-	while (x < game.level) {
-		let bx = 0
-		let by = 0
-
-		let px = random(90, 480)
-		let py = 0
 		
-		extraCanvas.noStroke()
-		extraCanvas.fill(155, 0, 0, 20, 70)
-		extraCanvas.rect(barrier.x, barrier.y, 20, 20)
-		//Drawing of barrier
+	extraCanvas.noStroke()
+	extraCanvas.fill(155, 0, 0, 20, 70)
+	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
+	//Drawing of barrier
 
-		extraCanvas.noStroke();
-		extraCanvas.fill(0, 155, 155, 20, 70);
-		extraCanvas.rect(platform.x, platform.y, 20, 20);
-		//Drawing of platform
+	extraCanvas.noStroke();
+	extraCanvas.fill(0, 155, 155, 20, 70);
+	extraCanvas.rect(platform.x, platform.y, 20, 20);
+	//Drawing of platform
 		
-		x +=1
-	}
 	
 	extraCanvas.noStroke()
 	extraCanvas.fill(155, 0, 0, 20, 70)
@@ -161,7 +168,7 @@ function draw() {
 	//Drawing of reward
 
 	noStroke();
-	fill(255, 255, 255, 20, 70);
+	fill(block.col1, block.col2, block.col3, 20, 70);
 	rect(block.x, block.y, 20, 20);
 	//Drawing of main block
 
@@ -179,6 +186,10 @@ function draw() {
 	if (game.wait > 1) {
 		setInterval(100)
 		game.wait = 0
+		setInterval(100)
+		block.col1 = 255
+		block.col2 = 255 
+		block.col3 = 255
 	}
 	}
 		
