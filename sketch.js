@@ -79,7 +79,8 @@ function draw() {
 	let w = dist(block.x, block.y, reward.x, reward.y)
 	if (w < 20 && game.nextleveltimer === 0) {
 		game.nextleveltimer = 1
-		block.y +=23
+		block.y +=25
+		game.jump = 0
 		setInterval(1000)
 		print("Congradulations! You have advanced to level " + game.level)
 		game.level += 1
@@ -115,7 +116,7 @@ function draw() {
 	//barrier and platform distance detection
 
 	let r = dist(reward.x, reward.y, platform.x, platform.y)
-	if (r > 150 || r < 60) {
+	if (r > 150 || r < 60 || platform.y < 20) {
 		reward.x = random(platform.x + 30, platform.x - 90)
 		reward.y = random(platform.y - 60, platform.y - 150)
 		clear()
