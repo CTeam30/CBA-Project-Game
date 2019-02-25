@@ -1,3 +1,4 @@
+let x = 0
 var game = {
 	life : 3,
 	dead : 0,
@@ -55,12 +56,27 @@ function setup() {
 
 function draw() {
 	
+	if (game.life === 0) {
+		background(255, 0, 0)
+		image.background(255, 0, 0)
+	}
+	
 	let d = dist(block.x, block.y, barrier.x, barrier.y)
 	if (d < 20 && game.wait < 1) {
 		game.wait += 1000
 		game.life = game.life - 1
 	}
 	//barrier and block distance detection
+	
+	let w = dist(block.x, block.y, reward.x, reward.y)
+	if (w < 20) {
+		game.level += 1
+	//	background(25, 100, 0)
+	//	image.background(200, 100, 0)
+		//print("green!")
+		//background(50)
+	}
+	//reward and block win detection
 	
 	let e = block.y - platform.y
 	let f = block.x - platform.x
@@ -109,10 +125,29 @@ function draw() {
 		clear();
 		//background(50);
 	}
+	while (x < game.level) {
+		let bx = 0
+		let by = 0
 
-	extraCanvas.noStroke();
-	extraCanvas.fill(155, 0, 0, 20, 70);
-	extraCanvas.rect(barrier.x, barrier.y, 20, 20);
+		let px = random(90, 480)
+		let py = 0
+		
+		extraCanvas.noStroke()
+		extraCanvas.fill(155, 0, 0, 20, 70)
+		extraCanvas.rect(barrier.x, barrier.y, 20, 20)
+		//Drawing of barrier
+
+		extraCanvas.noStroke();
+		extraCanvas.fill(0, 155, 155, 20, 70);
+		extraCanvas.rect(platform.x, platform.y, 20, 20);
+		//Drawing of platform
+		
+		x +=1
+	}
+	
+	extraCanvas.noStroke()
+	extraCanvas.fill(155, 0, 0, 20, 70)
+	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
 	//Drawing of barrier
 
 	extraCanvas.noStroke();
@@ -138,6 +173,7 @@ function draw() {
 	
 	if (block.y >= 200 || game.jump === 1) {
 			stamina = 0
+			game.jump = 0
 			//print(stamina)
 	
 	if (game.wait > 1) {
