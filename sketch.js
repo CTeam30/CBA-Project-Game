@@ -10,12 +10,19 @@ var game = {
 	nextlevel : 0,
 }
 
+var barline = {
+	x1 : 0,
+	x2 : 0,
+	y1 : 0,
+	y2 : 0,
+}
+
 var block = {
 	x: 0,
 	y: 200,
-	col1: 255,
+	col1: 0,
 	col2: 255,
-	col3: 255,
+	col3: 0,
 }
 
 var barrier = {
@@ -42,7 +49,7 @@ let stamina = 0
 let extraCanvas;
 
 function setup() {
-	createCanvas(600, 400);
+	createCanvas(500, 400);
 	platform.x = random(90, 480)
 	platform.y = random(110, 180)
 
@@ -51,7 +58,17 @@ function setup() {
 
 	reward.x = random(platform.x + 30, platform.x - 90)
 	reward.y = random(platform.y - 30, platform.y - 150)
+	
+	barline.x1 = random(20, 580)
+	barline.x2 = random(20, 580)
+	barline.y1 = random(50, 180)
+	barline.y2 = random(50, 180)
 
+	/*barline.x1 = 50
+	barline.x2 = 450
+	barline.y1 = 50
+	barline.y2 = 180*/
+	
 	extraCanvas = createGraphics(600, 400);
 	extraCanvas.clear()
 	background(50);
@@ -185,9 +202,13 @@ function draw() {
 	rect(block.x, block.y, 20, 20);
 	//Drawing of main block
 
-	extraCanvas.stroke(255, 0, 0);
+	extraCanvas.stroke(0, 0, 0);
 	extraCanvas.line(0, 220, 500, 220);
 	//Drawing of line on ground
+	
+	extraCanvas.stroke(200, 55, 50);
+	extraCanvas.line(barline.x1, barline.y1, barline.x2, barline.y2);
+	//Drawing of barrier line
 
 	image(extraCanvas, 0, 0);
 
