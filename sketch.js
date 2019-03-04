@@ -7,6 +7,7 @@ var game = {
 	jump: 0,
 	onbarrier: 1,
 	nextleveltimer : 0,
+	nextlevel : 0,
 }
 
 var block = {
@@ -59,6 +60,11 @@ function setup() {
 }
 
 function draw() {
+	
+	if (game.nextlevel === 1) {
+		game.nextlevel = 0
+		setup()
+	}
 
 	if (game.life === 0) {
 		background(255, 0, 0)
@@ -83,6 +89,7 @@ function draw() {
 		game.jump = 0
 		setInterval(1000)
 		print("Congradulations! You have advanced to level " + game.level)
+		game.nextlevel = 1
 		game.level += 1
 		game.wait += 1000
 		block.col1 = 0
@@ -97,7 +104,7 @@ function draw() {
 		game.gravitypull = 0
 		game.jump = 1
 		game.onbarrier = 1
-		if (game.onbarrier = 0) {
+		if (game.onbarrier === 0) {
 			block.y += 1
 		} else {
 			game.onbarrier = 0
@@ -108,7 +115,7 @@ function draw() {
 	//platform and block distance detection
 
 	let b = dist(barrier.x, barrier.y, platform.x, platform.y)
-	if (b > 100 || b < 30) {
+	if (b > 90 || b < 30) {
 		barrier.x = random(platform.x + 30, platform.x - 90)
 		barrier.y = random(platform.y + 30, platform.y - 90)
 		clear()
@@ -116,7 +123,7 @@ function draw() {
 	//barrier and platform distance detection
 
 	let r = dist(reward.x, reward.y, platform.x, platform.y)
-	if (r > 150 || r < 60 || platform.y < 20) {
+	if (r > 140 || r < 60 || platform.y < 20) {
 		reward.x = random(platform.x + 30, platform.x - 90)
 		reward.y = random(platform.y - 60, platform.y - 150)
 		clear()
@@ -124,7 +131,7 @@ function draw() {
 	//reward and platform distance detection
 
 	let t = dist(barrier.x, barrier.y, reward.x, reward.y)
-	if (t > 150 || t < 60) {
+	if (t > 140 || t < 60) {
 		reward.x = random(platform.x + 30, platform.x - 90)
 		reward.y = random(platform.y - 60, platform.y - 150)
 		clear()
@@ -147,15 +154,15 @@ function draw() {
 	
 
 
-	extraCanvas.noStroke()
-	extraCanvas.fill(155, 0, 0, 20, 70)
-	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
+	//extraCanvas.noStroke()
+	//extraCanvas.fill(155, 0, 0, 20, 70)
+//	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
 	//Drawing of barrier
 
-	extraCanvas.noStroke();
-	extraCanvas.fill(0, 155, 155, 20, 70);
-	extraCanvas.rect(platform.x, platform.y, 20, 20);
-	//Drawing of platform
+	//extraCanvas.noStroke();
+//	extraCanvas.fill(0, 155, 155, 20, 70);
+//	extraCanvas.rect(platform.x, platform.y, 20, 20);
+//	//Drawing of platform
 
 
 	extraCanvas.noStroke()
