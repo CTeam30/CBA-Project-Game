@@ -3,6 +3,7 @@ function preload () {
 	Platform = loadImage('Platform.jpg');
 	Main_Block = loadImage('Main_Block.jpg');
 	Reward = loadImage('Reward.jpg');
+	Background = loadImage('Background.png');
 }
 
 var game = {
@@ -141,7 +142,7 @@ function draw() {
 	let b = dist(barrier.x, barrier.y, platform.x, platform.y)
 	if (b > 90 || b < 60) {
 		barrier.x = random(platform.x + 60, platform.x - 90)
-		barrier.y = random(platform.y + 60, platform.y - 90)
+		barrier.y = random(platform.y + 60, platform.y - 70)
 		clear()
 	}
 	//barrier and platform distance detection
@@ -177,6 +178,8 @@ function draw() {
 	}
 	
 
+	image(Background, 0, 0, 500, 220)
+	//drawing background
 
 	//extraCanvas.noStroke()
 	//extraCanvas.fill(155, 0, 0, 20, 70)
