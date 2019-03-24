@@ -206,7 +206,8 @@ function draw() {
 	extraCanvas.rect(reward.x, reward.y, 20, 20);*/
 	//Drawing of reward
 
-	extraCanvas.image(Main_Block, block.x, block.y, 20, 20)
+	//extraCanvas.
+	image(Main_Block, block.x, block.y, 20, 20)
 	/*noStroke();
 	fill(block.col1, block.col2, block.col3, 20, 70);
 	rect(block.x, block.y, 20, 20);*/
