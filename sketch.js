@@ -1,3 +1,10 @@
+function preload () {
+	Barrier = loadImage('Barrier.png');
+	Platform = loadImage('Platform.jpg');
+	Main_Block = loadImage('Main_Block.jpg');
+	Reward = loadImage('Reward.jpg');
+}
+
 var game = {
 	life: 3,
 	dead: 0,
@@ -59,10 +66,10 @@ function setup() {
 	reward.x = random(platform.x + 30, platform.x - 90)
 	reward.y = random(platform.y - 30, platform.y - 150)
 	
-	barline.x1 = random(20, 580)
+	/*barline.x1 = random(20, 580)
 	barline.x2 = random(20, 580)
 	barline.y1 = random(50, 180)
-	barline.y2 = random(50, 180)
+	barline.y2 = random(50, 180)*/
 
 	/*barline.x1 = 50
 	barline.x2 = 450
@@ -132,9 +139,9 @@ function draw() {
 	//platform and block distance detection
 
 	let b = dist(barrier.x, barrier.y, platform.x, platform.y)
-	if (b > 90 || b < 30) {
-		barrier.x = random(platform.x + 30, platform.x - 90)
-		barrier.y = random(platform.y + 30, platform.y - 90)
+	if (b > 90 || b < 60) {
+		barrier.x = random(platform.x + 60, platform.x - 90)
+		barrier.y = random(platform.y + 60, platform.y - 90)
 		clear()
 	}
 	//barrier and platform distance detection
@@ -181,25 +188,28 @@ function draw() {
 //	extraCanvas.rect(platform.x, platform.y, 20, 20);
 //	//Drawing of platform
 
-
-	extraCanvas.noStroke()
+	extraCanvas.image(Barrier, barrier.x, barrier.y, 20, 20)
+	/*extraCanvas.noStroke()
 	extraCanvas.fill(155, 0, 0, 20, 70)
-	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
+	extraCanvas.rect(barrier.x, barrier.y, 20, 20)*/
 	//Drawing of barrier
 
-	extraCanvas.noStroke();
+	extraCanvas.image(Platform, platform.x, platform.y, 20, 20)
+	/*extraCanvas.noStroke();
 	extraCanvas.fill(0, 155, 155, 20, 70);
-	extraCanvas.rect(platform.x, platform.y, 20, 20);
+	extraCanvas.rect(platform.x, platform.y, 20, 20);*/
 	//Drawing of platform
 
-	extraCanvas.noStroke();
+	extraCanvas.image(Reward, reward.x, reward.y, 20, 20)
+	/*extraCanvas.noStroke();
 	extraCanvas.fill(155, 155, 0, 20, 70);
-	extraCanvas.rect(reward.x, reward.y, 20, 20);
+	extraCanvas.rect(reward.x, reward.y, 20, 20);*/
 	//Drawing of reward
 
-	noStroke();
+	extraCanvas.image(Main_Block, block.x, block.y, 20, 20)
+	/*noStroke();
 	fill(block.col1, block.col2, block.col3, 20, 70);
-	rect(block.x, block.y, 20, 20);
+	rect(block.x, block.y, 20, 20);*/
 	//Drawing of main block
 
 	extraCanvas.stroke(0, 0, 0);
