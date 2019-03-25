@@ -1,4 +1,4 @@
-function preload () {
+function preload() {
 	Barrier = loadImage('Barrier.png');
 	Platform = loadImage('Platform.jpg');
 	Main_Block = loadImage('Main_Block.jpg');
@@ -14,15 +14,15 @@ var game = {
 	gravitypull: 1,
 	jump: 0,
 	onbarrier: 1,
-	nextleveltimer : 0,
-	nextlevel : 0,
+	nextleveltimer: 0,
+	nextlevel: 0,
 }
 
 var barline = {
-	x1 : 0,
-	x2 : 0,
-	y1 : 0,
-	y2 : 0,
+	x1: 0,
+	x2: 0,
+	y1: 0,
+	y2: 0,
 }
 
 var block = {
@@ -66,7 +66,7 @@ function setup() {
 
 	reward.x = random(platform.x + 30, platform.x - 90)
 	reward.y = random(platform.y - 30, platform.y - 150)
-	
+
 	/*barline.x1 = random(20, 580)
 	barline.x2 = random(20, 580)
 	barline.y1 = random(50, 180)
@@ -76,8 +76,8 @@ function setup() {
 	barline.x2 = 450
 	barline.y1 = 50
 	barline.y2 = 180*/
-	
-	extraCanvas = createGraphics(600, 400);
+
+	extraCanvas = createGraphics(500, 400);
 	extraCanvas.clear()
 	background(50);
 	stroke(255, 0, 0);
@@ -85,7 +85,7 @@ function setup() {
 }
 
 function draw() {
-	
+
 	if (game.nextlevel === 1) {
 		game.nextlevel = 0
 		setup()
@@ -110,10 +110,10 @@ function draw() {
 	let w = dist(block.x, block.y, reward.x, reward.y)
 	if (w < 20 && game.nextleveltimer === 0) {
 		game.nextleveltimer = 1
-		block.y +=25
+		block.y += 25
 		game.jump = 0
 		setInterval(1000)
-		print("Congradulations! You have advanced to level " + game.level)
+		print("Congratulations! You have advanced to level " + game.level)
 		game.nextlevel = 1
 		game.level += 1
 		game.wait += 1000
@@ -122,7 +122,7 @@ function draw() {
 		block.col3 = 0
 	}
 	//reward and block win detection
-	
+
 	let e = block.y - platform.y
 	let f = block.x - platform.x
 	if (e > -22 && e <= -20 && f < 20 && f > -20) {
@@ -143,7 +143,7 @@ function draw() {
 	if (b > 90 || b < 60) {
 		barrier.x = random(platform.x + 60, platform.x - 90)
 		barrier.y = random(platform.y + 60, platform.y - 70)
-		clear()
+		extraCanvas.clear()
 	}
 	//barrier and platform distance detection
 
@@ -151,7 +151,7 @@ function draw() {
 	if (r > 140 || r < 60 || platform.y < 20) {
 		reward.x = random(platform.x + 30, platform.x - 90)
 		reward.y = random(platform.y - 60, platform.y - 150)
-		clear()
+		extraCanvas.clear()
 	}
 	//reward and platform distance detection
 
@@ -159,14 +159,14 @@ function draw() {
 	if (t > 140 || t < 60) {
 		reward.x = random(platform.x + 30, platform.x - 90)
 		reward.y = random(platform.y - 60, platform.y - 150)
-		clear()
+		extraCanvas.clear()
 	}
 	//reward and barrier distance detection
 
 	if (block.y < 200 && game.gravitypull === 1) {
 		setInterval(10);
 		block.y += 2;
-		clear();
+		extraCanvas.clear();
 		//background(50);
 	}
 
@@ -176,20 +176,20 @@ function draw() {
 		clear();
 		//background(50);
 	}
-	
+
 
 	image(Background, 0, 0, 500, 220)
 	//drawing background
 
 	//extraCanvas.noStroke()
 	//extraCanvas.fill(155, 0, 0, 20, 70)
-//	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
+	//	extraCanvas.rect(barrier.x, barrier.y, 20, 20)
 	//Drawing of barrier
 
 	//extraCanvas.noStroke();
-//	extraCanvas.fill(0, 155, 155, 20, 70);
-//	extraCanvas.rect(platform.x, platform.y, 20, 20);
-//	//Drawing of platform
+	//	extraCanvas.fill(0, 155, 155, 20, 70);
+	//	extraCanvas.rect(platform.x, platform.y, 20, 20);
+	//	//Drawing of platform
 
 	extraCanvas.image(Barrier, barrier.x, barrier.y, 20, 20)
 	/*extraCanvas.noStroke()
@@ -219,7 +219,7 @@ function draw() {
 	extraCanvas.stroke(0, 0, 0);
 	extraCanvas.line(0, 220, 500, 220);
 	//Drawing of line on ground
-	
+
 	extraCanvas.stroke(200, 55, 50);
 	extraCanvas.line(barline.x1, barline.y1, barline.x2, barline.y2);
 	//Drawing of barrier line
